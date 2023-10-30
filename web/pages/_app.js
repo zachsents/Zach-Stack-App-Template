@@ -7,6 +7,8 @@ import "@web/styles/globals.css"
 import { mantineTheme } from "@web/theme"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { AuthProvider, FirebaseAppProvider, FirestoreProvider } from "reactfire"
+import { FirebaseProvider } from "@zachsents/fire-query"
+import CreateClientModal from "@web/components/CreateClientModal"
 
 
 const queryClient = new QueryClient()
@@ -18,15 +20,17 @@ export default function MyApp({ Component, pageProps }) {
             <AuthProvider sdk={fire.auth}>
                 <FirestoreProvider sdk={fire.db}>
                     <QueryClientProvider client={queryClient}>
-                        <MantineProvider theme={mantineTheme} withNormalizeCSS withGlobalStyles withCSSVariables>
-                            <ModalsProvider modals={modals}>
-                                {/* This wrapper makes the footer stick to the bottom of the page */}
-                                <div className="min-h-screen flex flex-col">
-                                    <Component {...pageProps} />
-                                </div>
-                                <Notifications autoClose={3000} />
-                            </ModalsProvider>
-                        </MantineProvider>
+                        <FirebaseProvider firestore={fire.db} functions={fire.functions}>
+                            <MantineProvider theme={mantineTheme} withNormalizeCSS withGlobalStyles withCSSVariables>
+                                <ModalsProvider modals={modals}>
+                                    {/* This wrapper makes the footer stick to the bottom of the page */}
+                                    <div className="min-h-screen flex flex-col">
+                                        <Component {...pageProps} />
+                                    </div>
+                                    <Notifications autoClose={3000} />
+                                </ModalsProvider>
+                            </MantineProvider>
+                        </FirebaseProvider>
                     </QueryClientProvider>
                 </FirestoreProvider>
             </AuthProvider>
@@ -35,6 +39,5 @@ export default function MyApp({ Component, pageProps }) {
 }
 
 const modals = {
-
+    "CreateClient": CreateClientModal,
 }
-
