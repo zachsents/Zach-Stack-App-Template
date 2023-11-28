@@ -7,6 +7,7 @@ import "@web/styles/globals.css"
 import { mantineTheme } from "@web/theme"
 import { FirebaseProvider } from "@zachsents/fire-query"
 import { QueryClient, QueryClientProvider } from "react-query"
+import Head from "next/head"
 
 
 const queryClient = new QueryClient()
