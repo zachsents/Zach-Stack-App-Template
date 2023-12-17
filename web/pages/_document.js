@@ -1,8 +1,7 @@
 import { additionalCSSVariables } from "@web/theme"
 import { Head, Html, Main, NextScript } from "next/document"
+import siteInfo from "@web/site-info.json"
 
-const headline = "xxx"
-const description = "xxx"
 
 export default function Document() {
 
@@ -16,7 +15,7 @@ export default function Document() {
                 {/* Meta Description */}
                 <meta
                     name="description"
-                    content={description}
+                    content={siteInfo.description}
                     key="description"
                 />
 
@@ -30,22 +29,22 @@ export default function Document() {
                 {/* OpenGraph */}
                 <meta
                     property="og:title"
-                    content={headline}
+                    content={siteInfo.name}
                     key="ogtitle"
                 />
                 <meta
                     property="og:description"
-                    content={description}
+                    content={siteInfo.description}
                     key="ogdescription"
                 />
                 <meta property="og:image" content="/assets/og.png" />
 
                 {/* Twitter */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={headline} />
+                <meta name="twitter:title" content={siteInfo.name} />
                 <meta name="twitter:creator" content="@Zach_Sents" />
                 <meta name="twitter:image" content="/assets/og.png" />
-                <meta name="twitter:description" content={description} />
+                <meta name="twitter:description" content={siteInfo.description} />
 
                 {/* Assets */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
